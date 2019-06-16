@@ -14,3 +14,5 @@ stock_quantity INT,
 PRIMARY KEY (item_id)
 
 )
+
+SELECT * FROM products;
