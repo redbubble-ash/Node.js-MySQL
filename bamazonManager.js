@@ -58,3 +58,15 @@ function saleSearch() {
 
     });
 }
+
+function lowInvSearch(){
+    con.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE stock_quantity < 5", 
+    function (err, result, fields) {
+        if (err) throw err;
+        console.log("\nProducts are available to sale:\n" + cTable.getTable(result))
+
+});
+
+
+
+}
