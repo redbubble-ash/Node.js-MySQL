@@ -27,8 +27,6 @@ con.connect(function(err) {
 });
 
   function idSearch(){
-      var totalAmt = 0;
-      var unitPrice = 0;
 
       var questions = [
         {
@@ -45,21 +43,43 @@ con.connect(function(err) {
 
       inquirer.prompt(questions).then(function(answer){
         // console.log(answer);
-        var query = "SELECT price, stock_quantity FROM products WHERE ?";
+        var query = "SELECT item_id, price, stock_quantity FROM products WHERE ?";
         con.query(query, {item_id: answer.productId }, function(err, res){
             if (err) throw err;
-            unitPrice = res[0].price;
-            // console.log(unitPrice);
-            units = parseFloat(answer.unitsToBuy);
-            totalAmt = parseFloat((unitPrice * units).toFixed(2));
-            console.log("Total buy "+ units +" units");
-            console.log(totalAmt);
+            var unitPrice = res[0].price;
+            var inventory = res[0].stock_quantity;
+            var item_id = res[0].item_id;
+            var units = parseInt(answer.unitsToBuy);
+            var totalAmt = parseFloat((unitPrice * units).toFixed(2));
+            var remain = inventory - units;
+            if (units > inventory){
+                console.log("Insufficient quantity!");
+            }
+            else{
+                updateProducts(item_id, remain);
+                console.log("Item #" + item_id + " has remaining inventory of " + remain);
+                console.log("The total cost of your purchase is "+ totalAmt);
+            }
     
         });
       });
 
-  };
+};
 
+function updateProducts(id, inv){
+    // console.log("Updating all products quantities ...\n");
+    var query = "UPDATE products SET ? WHERE ?";
+    var query = con.query(query,[{stock_quantity: inv}, {item_id: id }],
+        function(err, res) {
+          if (err) throw err;
+        //   console.log(res.affectedRows + " products updated!\n");
+        }
+      );
+    
+    //   // logs the actual query being run
+      console.log(query.sql);
+    
+}
   
   
   
