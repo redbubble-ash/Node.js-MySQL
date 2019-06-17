@@ -70,6 +70,59 @@ function lowInvSearch() {
 }
 
 function addInv() {
+
+    var questions = [
+        {
+            name: "productId",
+            type: "input",
+            message: "Which product would you like to add more inventory. Enter product ID."
+          },
+          {
+            name: "invToAdd",
+            type: "input",
+            message: "How many more inventory will be added to this product?"
+        }
+
+      ];
+
+      inquirer.prompt(questions).then(function (answer) {
+        var query = "SELECT * FROM products WHERE ?";
+        con.query(query, {
+            item_id: answer.productId
+        }, function (err, res) {
+            if (err) throw err;
+            var inventory = res[0].stock_quantity;
+            var item_id = res[0].item_id;
+            var totalAdded = parseInt(answer.invToAdd);
+            var remain = inventory + totalAdded;
+            updateProducts(item_id, remain);
+            console.log("The total inventory of product #" + item_id +" has increased by " + totalAdded +", now is " + remain + " in total.");
+            saleSearch();
+        });
+    });
+}
+
+function updateProducts(id, inv) {
+    // console.log("Updating all products quantities ...\n");
+    var query = "UPDATE products SET ? WHERE ?";
+    var query = con.query(query, [{
+            stock_quantity: inv
+        }, {
+            item_id: id
+        }],
+        function (err, res) {
+            if (err) throw err;
+            //   console.log(res.affectedRows + " products updated!\n");
+        }
+    );
+
+    //   // logs the actual query being run
+    console.log(query.sql);
+
+}
+
+
+function addPro() {
     console.log("Inserting a new product...\n");
     var questions = [
         {
@@ -120,7 +173,7 @@ function addInv() {
         console.log(query.sql);
 
     saleSearch();
-    
+
     })
 
 
