@@ -9,44 +9,52 @@ var con = mysql.createConnection({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE_NAME
-    });
-    
-    con.connect(function(err) {
-        if (err) throw err;
-        runSearch();
-    });
-    
-    function runSearch(){
-        inquirer
+});
+
+con.connect(function (err) {
+    if (err) throw err;
+    runSearch();
+});
+
+function runSearch() {
+    inquirer
         .prompt({
             name: "action",
             type: "list",
             message: "What would you like to do?",
             choices: [
-              "View Products for Sale",
-              "View Low Inventory",
-              "Add to Inventory",
-              "Add New Product",
+                "View Products for Sale",
+                "View Low Inventory",
+                "Add to Inventory",
+                "Add New Product",
             ]
-          })    
-          .then(function(answer) {
+        })
+        .then(function (answer) {
             switch (answer.action) {
-            case "View Products for Sale":
-              saleSearch();
-              break;
-      
-            case "View Low Inventory":
-              lowInvSearch();
-              break;
-      
-            case "Add to Inventory":
-              addInv();
-              break;
-      
-            case "Add New Product":
-              addPro();
-              break;
+                case "View Products for Sale":
+                    saleSearch();
+                    break;
+
+                case "View Low Inventory":
+                    lowInvSearch();
+                    break;
+
+                case "Add to Inventory":
+                    addInv();
+                    break;
+
+                case "Add New Product":
+                    addPro();
+                    break;
             }
 
-          });
-    }
+        });
+}
+
+function saleSearch() {
+    con.query("SELECT item_id, product_name, price, stock_quantity FROM products", function (err, result, fields) {
+            if (err) throw err;
+            console.log("\nProducts are available to sale:\n" + cTable.getTable(result))
+
+    });
+}
