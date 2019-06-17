@@ -53,20 +53,75 @@ function runSearch() {
 
 function saleSearch() {
     con.query("SELECT item_id, product_name, price, stock_quantity FROM products", function (err, result, fields) {
-            if (err) throw err;
-            console.log("\nProducts are available to sale:\n" + cTable.getTable(result))
+        if (err) throw err;
+        console.log("\nProducts are available to sale:\n" + cTable.getTable(result))
 
     });
 }
 
-function lowInvSearch(){
-    con.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE stock_quantity < 5", 
-    function (err, result, fields) {
-        if (err) throw err;
-        console.log("\nProducts are available to sale:\n" + cTable.getTable(result))
+function lowInvSearch() {
+    con.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE stock_quantity < 5",
+        function (err, result, fields) {
+            if (err) throw err;
+            console.log("\nProducts are available to sale:\n" + cTable.getTable(result))
 
-});
+        });
 
+}
+
+function addInv() {
+    console.log("Inserting a new product...\n");
+    var questions = [
+        {
+            name: "product",
+            type: "input",
+            message: "What product would you like to add on the list for sale."
+        },
+        {
+            name: "department",
+            type: "list",
+            message: "Which department does it belong to?",
+            choices: [
+                "Electronics",
+                "Pet",
+                "Home",
+                "Outdoor Recreation",
+            ]
+        },
+        {
+            name: "price",
+            type: "input",
+            message: "What is the unit price?"
+        },
+        {
+            name: "inventory",
+            type: "input",
+            message: "What is the total number of inventory?"
+        },
+
+
+    ];
+
+    inquirer.prompt(questions).then(function (answer) {
+
+        var query = con.query(
+            "INSERT INTO products SET ?", {
+                product_name: answer.product,
+                department_name: answer.department,
+                price: answer.price,
+                stock_quantity:answer.inventory
+            },
+            function (err, res) {
+                if (err) throw err;
+            }
+        );
+    
+        // logs the actual query being run
+        console.log(query.sql);
+
+    saleSearch();
+    
+    })
 
 
 }
