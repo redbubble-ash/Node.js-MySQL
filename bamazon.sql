@@ -67,3 +67,11 @@ VALUES
  ("Pet", 1000),
  ("Home", 1500),
  ("Outdoor Recreation",1200);
+
+
+-- Using JOINS to join two table, aliases to create a temp column head & GROUP BY to sort by each department
+
+SELECT departments.department_id, products.department_name, departments.over_head_costs, SUM(products.product_sales) AS total_product_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit
+FROM departments
+INNER JOIN products ON departments.department_name = products.department_name
+GROUP  BY department_name;
