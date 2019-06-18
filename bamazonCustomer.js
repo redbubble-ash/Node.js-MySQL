@@ -68,7 +68,7 @@ function idSearch() {
 
 function updateProducts(id, inv, sales) {
     // console.log("Updating all products quantities ...\n");
-    // use , to seperate two different SET
+    // use , to seperate two different SET2
     var query = "UPDATE products SET ?, ? WHERE ?";
     var query = con.query(query, [
         { stock_quantity: inv}, 

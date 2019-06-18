@@ -31,7 +31,7 @@ VALUES
     (7, "Travel Backpac", "Outdoor Recreation", 88.89, 200),
     (8, "Dog Toy", "Pet", 25.60, 300),
     (9, "Bike", "Outdoor Recreation", 449.99, 20),
-    (10, "Waterproof Rain Jacket", "Outdoor Recration", 59.96, 100),
+    (10, "Waterproof Rain Jacket", "Outdoor Recreation", 59.96, 100),
     (11, "Bed Pillow", "Home", 45.45, 150),
     (12, "Dinnerware set", "Home", 119.99, 50),
     (13, "Slow Cooker", "Home", 45.55, 60),
@@ -41,7 +41,7 @@ VALUES
     (17, "Bird Cage", "Pet", 150.55, 30),
     (18, "Dog Carrier", "Pet", 56.64, 65),
     (19, "Bath Towel Set", "Home", 44.99, 150),
-    (20, "Hiking Shoes", "Outdoor Recration", 78.85, 50);
+    (20, "Hiking Shoes", "Outdoor Recreation", 78.85, 50);
 
 
 
@@ -59,3 +59,11 @@ CREATE TABLE departments
 
 ALTER TABLE products
 ADD product_sales DECIMAL(10,2) NOT NULL;
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+VALUES
+ ("Electronics", 2000),
+ ("Pet", 1000),
+ ("Home", 1500),
+ ("Outdoor Recreation",1200);
