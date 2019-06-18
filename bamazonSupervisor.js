@@ -54,3 +54,43 @@ function salesReport() {
     );
 
 }
+
+function addNewDepartment() {
+    console.log("Inserting a new department...\n");
+    var questions = [{
+            name: "departments",
+            type: "input",
+            message: "What is the name of the department would you like to add?"
+        },
+        {
+            name: "overHeadCost",
+            type: "input",
+            message: "What is the over head cost for this new department?"
+        },
+    ];
+
+    inquirer.prompt(questions).then(function (answer) {
+
+        var query = con.query(
+            "INSERT INTO departments SET ?", {
+                department_name: answer.departments,
+                over_head_costs: answer.overHeadCost,
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log("\nNew department is: " + res.department_name)
+
+
+            }
+        );
+
+        con.query("SELECT department_id, department_name FROM departments", function (err, result, fields) {
+            if (err) throw err;
+            console.log("\nCurrent departments are\n" + cTable.getTable(result))
+
+        })
+    })
+
+
+
+};
