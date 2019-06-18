@@ -42,3 +42,20 @@ VALUES
     (18, "Dog Carrier", "Pet", 56.64, 65),
     (19, "Bath Towel Set", "Home", 44.99, 150),
     (20, "Hiking Shoes", "Outdoor Recration", 78.85, 50);
+
+
+
+CREATE TABLE departments
+(
+
+    department_id INT NOT NULL AUTO_INCREMENT,
+    department_name VARCHAR(100) NOT NULL,
+    over_head_costs DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (department_id)
+
+)
+
+-- add a column "product_sale" on the product table;
+
+ALTER TABLE products
+ADD product_sales DECIMAL(10,2) NOT NULL;

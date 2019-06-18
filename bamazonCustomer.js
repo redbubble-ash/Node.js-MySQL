@@ -56,7 +56,7 @@ function idSearch() {
             if (units > inventory) {
                 console.log("Insufficient quantity!");
             } else {
-                updateProducts(item_id, remain);
+                updateProducts(item_id, remain, totalAmt);
                 console.log("Item #" + item_id + " has remaining inventory of " + remain);
                 console.log("The total cost of your purchase is " + totalAmt);
             }
@@ -66,14 +66,15 @@ function idSearch() {
 
 };
 
-function updateProducts(id, inv) {
+function updateProducts(id, inv, sales) {
     // console.log("Updating all products quantities ...\n");
-    var query = "UPDATE products SET ? WHERE ?";
-    var query = con.query(query, [{
-            stock_quantity: inv
-        }, {
-            item_id: id
-        }],
+    // use , to seperate two different SET
+    var query = "UPDATE products SET ?, ? WHERE ?";
+    var query = con.query(query, [
+        { stock_quantity: inv}, 
+        { product_sales: sales},
+        { item_id: id },
+    ],
         function (err, res) {
             if (err) throw err;
             //   console.log(res.affectedRows + " products updated!\n");
