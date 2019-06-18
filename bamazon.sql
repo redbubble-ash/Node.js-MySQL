@@ -55,10 +55,10 @@ CREATE TABLE departments
 
 )
 
--- add a column "product_sale" on the product table;
+-- add a column "product_sale" on the product table, * default as 0 when new product is entered
 
 ALTER TABLE products
-ADD product_sales DECIMAL(10,2) NOT NULL;
+ADD product_sales DECIMAL(10,2) NULL DEFAULT 0;;
 
 INSERT INTO departments
     (department_name, over_head_costs)

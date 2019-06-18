@@ -70,7 +70,7 @@ function addNewDepartment() {
     ];
 
     inquirer.prompt(questions).then(function (answer) {
-
+        console.log("\nNew department is: " + answer.departments);
         var query = con.query(
             "INSERT INTO departments SET ?", {
                 department_name: answer.departments,
@@ -78,9 +78,6 @@ function addNewDepartment() {
             },
             function (err, res) {
                 if (err) throw err;
-                console.log("\nNew department is: " + res.department_name)
-
-
             }
         );
 
