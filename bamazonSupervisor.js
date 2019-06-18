@@ -42,6 +42,15 @@ function runSearch() {
         });
 }
 
-function salesReport(){
-    
+function salesReport() {
+    var query = "SELECT departments.department_id, products.department_name, departments.over_head_costs, SUM(products.product_sales) AS total_product_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP  BY department_name";
+    var query = con.query(query,
+        function (err, res) {
+            if (err) throw err;
+            console.log("\nProduct Sales by Department\n" + cTable.getTable(res))
+
+        }
+
+    );
+
 }
