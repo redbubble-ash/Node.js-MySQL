@@ -5,7 +5,7 @@ This is an Amazon-like storefront app, which was built by using MySQL. The app w
 
 ## Instructions
 
-#1: Customer View
+### 1: Customer View
 
 1. this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 
@@ -18,12 +18,31 @@ This is an Amazon-like storefront app, which was built by using MySQL. The app w
 
    * If not, the app should log a phrase like `Insufficient quantity!`, and then prevent the order from going through.
 
-   Format: ![Alt Text](/images/customer2.gif)
+   Example: ![Alt Text](/images/customer2.gif)
 
 4. However, if department store _does_ have enough of the product, the customer's order will be fulfilled
 
    * This means updating the SQL database to reflect the remaining quantity.
    * Once the update goes through, show the customer the total cost of their purchase.
 
-      Format: ![Alt Text](/images/customer1.gif)
+   Example: ![Alt Text](/images/customer1.gif)
+
+### 2: Manager View
+
+* If a manager selects `View Products for Sale`, the app should list every available item: the item IDs, names, prices, and quantities.
+
+   Example: ![Alt Text](/images/manager_view_products.gif)
+
+* If a manager selects `View Low Inventory`, then it should list all items with an inventory count lower than five.
+
+   Example: ![Alt Text](/images/manager_view_low.gif)
+
+* If a manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+
+   Example: ![Alt Text](/images/manager_view_add_inv.gif)
+
+* If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
+
+   Example: ![Alt Text](/images/manager_add_new1.gif)
+   Example: ![Alt Text](/images/manager_add_new2.gif)
 
