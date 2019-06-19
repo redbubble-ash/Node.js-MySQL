@@ -37,12 +37,30 @@ This is an Amazon-like storefront app, which was built by using MySQL. The app w
 
    Example: ![Alt Text](/images/manager_view_low.gif)
 
-* If a manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+* If a manager selects `Add to Inventory`, the app should display a prompt that will let the manager "add more" of any item currently in the store.
 
    Example: ![Alt Text](/images/manager_view_add_inv.gif)
 
 * If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
 
    Example: ![Alt Text](/images/manager_add_new1.gif)
+
    Example: ![Alt Text](/images/manager_add_new2.gif)
 
+
+### 3: Supervisor View
+
+1. Running this application will list a set of menu options:
+
+   * View Product Sales by Department
+   
+   * Create New Department
+
+2. When a supervisor selects `View Product Sales by Department`, the app should display a summarized table in their terminal/bash window.
+
+   Example: ![Alt Text](/images/supervisor_view_profit.gif)
+
+
+3. When a supervisor selects `Create New Department`, the app should allow the supervisor to add a department to the store.
+
+   Example: ![Alt Text](/images/supervisor_add_department.gif)
